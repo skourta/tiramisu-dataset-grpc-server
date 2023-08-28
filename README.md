@@ -12,8 +12,8 @@ This is a GRPC server for the Tiramisu dataset. It is written in Python and uses
 1. Launch the server using: `python dataset_grp_server/server.py`
 2. Run the tests using: `pytest`
 
-> Note!
 > The tests require the server to be running.
+
 > The save path of the datasets needs to be empty for the final test to pass.
 ## Usage
 Launch the server using: `python dataset_grp_server/server.py`
