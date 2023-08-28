@@ -8,13 +8,15 @@ This is a GRPC server for the Tiramisu dataset. It is written in Python and uses
 2. Install dependencies using poetry: `poetry install`
 
 
-# Tests
+## Tests
 1. Launch the server using: `python dataset_grp_server/server.py`
 2. Run the tests using: `pytest`
 
-> The tests require the server to be running.
+###  Notes!
 
-> The save path of the datasets needs to be empty for the final test to pass.
+> **The tests require the server to be running.**
+
+> **The save path of the datasets needs to be empty for the final test to pass.**
 ## Usage
 Launch the server using: `python dataset_grp_server/server.py`
 
