@@ -3,7 +3,7 @@ import logging
 import pickle
 import socket
 from concurrent import futures
-from typing import Tuple
+from typing import Dict, Tuple
 
 import grpc
 import grpc_files.tiramisu_function_pb2 as tiramisu_function_pb2
@@ -36,16 +36,16 @@ class TiramisuServicer(tiramisu_function_pb2_grpc.TiramisuDataServerServicer):
             data, cpp = self.data_service.get_function_by_name(function_name)
         else:
             function_name, data, cpp = self.data_service.get_next_function()
-            # function_name = self.keys[self.current_function]
-            # data = self.dataset[function_name]
-            # cpp = self.cpps[function_name]
-            # self.current_function += 1
-            # if self.current_function >= len(self.keys):
-            #     self.current_function = 0
-        print(function_name)
+        print("Served", function_name)
         return tiramisu_function_pb2.TiramisuFuction(
             name=function_name, content=json.dumps(data), cpp=json.dumps(cpp)
         )
+
+    def SaveTiramisuFunction(self, request, context):
+        function_name = request.name
+        data: Dict = json.loads(request.content)
+        self.data_service.update_dataset(function_name, data)
+        return tiramisu_function_pb2.TiramisuFunctionName(name=function_name)
 
 
 def serve():

@@ -60,3 +60,41 @@ class DataService:
 
     def get_function_by_name(self, function_name):
         return self.dataset[function_name], self.cpps[function_name]
+
+    # Update the dataset with the new function
+    def update_dataset(self, function_name: str, function_dict: dict) -> bool:
+        """
+        Update the dataset with the new function
+        :param function_name: name of the function
+        :param function_dict: dictionary containing the function schedules
+        :return: True if the dataset was saved successfully
+        """
+        for key in function_dict.keys():
+            self.dataset[function_name][key] = function_dict[key]
+
+        self.nbr_updates += 1
+        # print(f"# updates: {self.nbr_updates}")
+        if self.nbr_updates % self.saving_frequency == 0:
+            if self.nbr_updates % (2 * self.saving_frequency):
+                return self.save_dataset_to_disk(version=2)
+            else:
+                return self.save_dataset_to_disk(version=1)
+        return False
+
+    # Save the dataset to disk
+    def save_dataset_to_disk(self, version=1) -> bool:
+        """
+        Save the dataset to disk
+        :param version: version of the dataset to save (1 or 2)
+        :return: True if the dataset was saved successfully
+        """
+        print("[Start] Save the legality_annotations_dict to disk")
+
+        updated_dataset_name = (
+            f"{self.path_to_save_dataset}/{self.dataset_name}_updated_{version}"
+        )
+        with open(f"{updated_dataset_name}.pkl", "wb") as f:
+            pickle.dump(self.dataset, f, protocol=pickle.HIGHEST_PROTOCOL)
+
+        print("[Done] Save the legality_annotations_dict to disk")
+        return True

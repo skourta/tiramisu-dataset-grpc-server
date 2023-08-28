@@ -1,9 +1,0 @@
-dataset_format: PICKLE
-cpps_path : /scratch/sk10691/workspace/dataset_source/functions_cpps.pkl
-dataset_path: /scratch/sk10691/workspace/dataset_source/full_rl.pkl
-save_path: datasets
-shuffle: True
-seed: 7
-saving_frequency: 500
-# When doing evaluation on the benchmark set the value to True
-is_benchmark: False

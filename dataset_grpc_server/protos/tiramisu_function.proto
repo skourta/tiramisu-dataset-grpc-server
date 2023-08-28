@@ -21,7 +21,8 @@ package tiramisudataserver;
 // The greeting service definition.
 service TiramisuDataServer {
   // Sends a greeting
-  rpc GetTiramisuFunction (TiramisuFunctionName) returns (TiramisuFuction) {}
+  rpc GetTiramisuFunction (TiramisuFunctionName) returns (TiramisuFunction) {}
+  rpc SaveTiramisuFunction (TiramisuFunction) returns (TiramisuFunctionName) {}
 }
 
 // The request message containing the user's name.
@@ -30,7 +31,7 @@ message TiramisuFunctionName {
 }
 
 // The response message containing the greetings
-message TiramisuFuction {
+message TiramisuFunction {
   string name = 1;
   string content = 2;
   string cpp = 3;
