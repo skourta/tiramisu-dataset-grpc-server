@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "dataset-grpc-server"
+version = "0.1.0"
+description = ""
+authors = ["Smail KOURTA <sk10691@nyu.edu>"]
+readme = "README.md"
+# packages = [{include = "dataset_grpc_server"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+grpcio = "^1.57.0"
+grpcio-tools = "^1.57.0"
+pyyaml = "^6.0.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
