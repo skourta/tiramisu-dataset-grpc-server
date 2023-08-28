@@ -1,6 +1,6 @@
 # Tiramisu Dataset GRPC Server
 
-This is a GRPC server for the Tiramisu dataset. It is written in Python and uses the [GRPC](https://grpc.io/) framework.
+This is a GRPC server for the Tiramisu dataset. It is written in Python and uses the [gRPC](https://grpc.io/) framework.
 
 ## Installation
 
