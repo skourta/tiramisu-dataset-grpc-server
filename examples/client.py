@@ -7,8 +7,11 @@ import logging
 import socket
 
 import grpc
-import tiramisu_function_pb2 as tiramisu_function_pb2
-import tiramisu_function_pb2_grpc as tiramisu_function_pb2_grpc
+
+from dataset_grpc_server.grpc_files import (
+    tiramisu_function_pb2,
+    tiramisu_function_pb2_grpc,
+)
 
 
 def parse_args():
@@ -22,7 +25,7 @@ def run():
     # NOTE(gRPC Python Team): .close() is possible on a channel and should be
     # used in circumstances in which the with statement does not fit the needs
     # of the code.
-    print("Will try to greet world ...")
+    print("Will try to get a tiramisu function from the server ...")
     args = parse_args()
     ip = args.ip
 
