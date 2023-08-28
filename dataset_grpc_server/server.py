@@ -1,22 +1,16 @@
+import argparse
 import json
 import logging
-import pickle
 import socket
 from concurrent import futures
-from typing import Dict, Tuple
+from typing import Dict
 
 import grpc
 import grpc_files.tiramisu_function_pb2 as tiramisu_function_pb2
 import grpc_files.tiramisu_function_pb2_grpc as tiramisu_function_pb2_grpc
-from config import Config
 from data_service import DataService
 
-# def load_test_data() -> Tuple[dict, dict]:
-#     with open("_tmp/test_data.pkl", "rb") as f:
-#         dataset = pickle.load(f)
-#     with open("_tmp/test_data_cpps.pkl", "rb") as f:
-#         cpps = pickle.load(f)
-#     return dataset, cpps
+from config import Config
 
 
 class TiramisuServicer(tiramisu_function_pb2_grpc.TiramisuDataServerServicer):
@@ -26,9 +20,6 @@ class TiramisuServicer(tiramisu_function_pb2_grpc.TiramisuDataServerServicer):
             Config.init()
 
         self.data_service = DataService(Config.config)
-        # self.dataset, self.cpps = load_test_data()
-        # self.current_function = 0
-        # self.keys = list(self.dataset.keys())
 
     def GetTiramisuFunction(self, request, context):
         function_name = request.name
@@ -48,13 +39,12 @@ class TiramisuServicer(tiramisu_function_pb2_grpc.TiramisuDataServerServicer):
         return tiramisu_function_pb2.TiramisuFunctionName(name=function_name)
 
 
-def serve():
-    port = "50051"
+def serve(port="50051"):
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     tiramisu_function_pb2_grpc.add_TiramisuDataServerServicer_to_server(
         TiramisuServicer(), server
     )
-    server.add_insecure_port("[::]:" + port)
+    server.add_insecure_port(f"[::]:{port}")
     server.start()
     print(
         f"Server started, listening on {socket.gethostbyname(socket.gethostname())}:{port}"
@@ -62,6 +52,12 @@ def serve():
     server.wait_for_termination()
 
 
+parser = argparse.ArgumentParser()
+parser.add_argument("--port", type=str, default="50051")
+parser.add_argument("--config", type=str, default="./config.yaml")
+
 if __name__ == "__main__":
     logging.basicConfig()
-    serve()
+    args = parser.parse_args()
+    Config.init(config_yaml=args.config)
+    serve(port=args.port)
