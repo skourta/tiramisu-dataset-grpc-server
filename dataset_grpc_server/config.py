@@ -13,6 +13,7 @@ class DatasetConfig:
     shuffle: bool = False
     seed: int = None
     saving_frequency: int = 10000
+    server_address: str = "."
 
     def __init__(self, dataset_config_dict: Dict):
         # self.dataset_format = DatasetFormat.from_string(

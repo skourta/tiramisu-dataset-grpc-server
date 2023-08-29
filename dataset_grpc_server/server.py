@@ -1,6 +1,7 @@
 import argparse
 import json
 import logging
+import os
 import socket
 from concurrent import futures
 from typing import Dict
@@ -49,15 +50,34 @@ def serve(port="50051"):
     print(
         f"Server started, listening on {socket.gethostbyname(socket.gethostname())}:{port}"
     )
+    # write ip and port to file
+    with open(os.path.join(Config.config.server_address, "server_address"), "w") as f:
+        f.write(f"{socket.gethostbyname(socket.gethostname())}:{port}")
     server.wait_for_termination()
 
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--port", type=str, default="50051")
 parser.add_argument("--config", type=str, default="./config.yaml")
+# path to save ip and port to
+parser.add_argument("--server-address", type=str, default="")
+parser.add_argument
+
 
 if __name__ == "__main__":
     logging.basicConfig()
     args = parser.parse_args()
+
+    # load config
     Config.init(config_yaml=args.config)
+
+    # set server address
+    if args.server_address:
+        Config.config.server_address = args.server_address
+
+    # empty the server address file
+    with open(os.path.join(Config.config.server_address, "server_address"), "w") as f:
+        f.write("")
+
+    # start the server
     serve(port=args.port)
