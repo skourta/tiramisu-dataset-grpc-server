@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x17tiramisu_function.proto\x12\x12tiramisudataserver\"$\n\x14TiramisuFunctionName\x12\x0c\n\x04name\x18\x01 \x01(\t\"=\n\x0fTiramisuFuction\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07\x63ontent\x18\x02 \x01(\t\x12\x0b\n\x03\x63pp\x18\x03 \x01(\t2\xe5\x01\n\x12TiramisuDataServer\x12\x66\n\x13GetTiramisuFunction\x12(.tiramisudataserver.TiramisuFunctionName\x1a#.tiramisudataserver.TiramisuFuction\"\x00\x12g\n\x14SaveTiramisuFunction\x12#.tiramisudataserver.TiramisuFuction\x1a(.tiramisudataserver.TiramisuFunctionName\"\x00\x42\x06\xa2\x02\x03TDSb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x17tiramisu_function.proto\x12\x12tiramisudataserver\"$\n\x14TiramisuFunctionName\x12\x0c\n\x04name\x18\x01 \x01(\t\">\n\x10TiramisuFunction\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07\x63ontent\x18\x02 \x01(\t\x12\x0b\n\x03\x63pp\x18\x03 \x01(\t\"\x1b\n\x0b\x44\x61tasetSize\x12\x0c\n\x04size\x18\x01 \x01(\x03\"\x07\n\x05\x45mpty\"(\n\x17TiramisuListOfFunctions\x12\r\n\x05names\x18\x01 \x03(\t2\x97\x03\n\x12TiramisuDataServer\x12g\n\x13GetTiramisuFunction\x12(.tiramisudataserver.TiramisuFunctionName\x1a$.tiramisudataserver.TiramisuFunction\"\x00\x12h\n\x14SaveTiramisuFunction\x12$.tiramisudataserver.TiramisuFunction\x1a(.tiramisudataserver.TiramisuFunctionName\"\x00\x12N\n\x0eGetDatasetSize\x12\x19.tiramisudataserver.Empty\x1a\x1f.tiramisudataserver.DatasetSize\"\x00\x12^\n\x12GetListOfFunctions\x12\x19.tiramisudataserver.Empty\x1a+.tiramisudataserver.TiramisuListOfFunctions\"\x00\x42\x06\xa2\x02\x03TDSb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -24,8 +24,14 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._serialized_options = b'\242\002\003TDS'
   _globals['_TIRAMISUFUNCTIONNAME']._serialized_start=47
   _globals['_TIRAMISUFUNCTIONNAME']._serialized_end=83
-  _globals['_TIRAMISUFUCTION']._serialized_start=85
-  _globals['_TIRAMISUFUCTION']._serialized_end=146
-  _globals['_TIRAMISUDATASERVER']._serialized_start=149
-  _globals['_TIRAMISUDATASERVER']._serialized_end=378
+  _globals['_TIRAMISUFUNCTION']._serialized_start=85
+  _globals['_TIRAMISUFUNCTION']._serialized_end=147
+  _globals['_DATASETSIZE']._serialized_start=149
+  _globals['_DATASETSIZE']._serialized_end=176
+  _globals['_EMPTY']._serialized_start=178
+  _globals['_EMPTY']._serialized_end=185
+  _globals['_TIRAMISULISTOFFUNCTIONS']._serialized_start=187
+  _globals['_TIRAMISULISTOFFUNCTIONS']._serialized_end=227
+  _globals['_TIRAMISUDATASERVER']._serialized_start=230
+  _globals['_TIRAMISUDATASERVER']._serialized_end=637
 # @@protoc_insertion_point(module_scope)

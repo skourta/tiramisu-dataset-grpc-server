@@ -23,6 +23,8 @@ service TiramisuDataServer {
   // Sends a greeting
   rpc GetTiramisuFunction (TiramisuFunctionName) returns (TiramisuFunction) {}
   rpc SaveTiramisuFunction (TiramisuFunction) returns (TiramisuFunctionName) {}
+  rpc GetDatasetSize (Empty) returns (DatasetSize) {}
+  rpc GetListOfFunctions (Empty) returns (TiramisuListOfFunctions) {}
 }
 
 // The request message containing the user's name.
@@ -35,4 +37,15 @@ message TiramisuFunction {
   string name = 1;
   string content = 2;
   string cpp = 3;
+}
+
+message DatasetSize {
+  int64 size = 1;
+}
+
+message Empty {
+}
+
+message TiramisuListOfFunctions {
+  repeated string names = 1;
 }

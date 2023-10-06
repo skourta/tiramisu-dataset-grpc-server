@@ -17,12 +17,22 @@ class TiramisuDataServerStub(object):
         self.GetTiramisuFunction = channel.unary_unary(
             "/tiramisudataserver.TiramisuDataServer/GetTiramisuFunction",
             request_serializer=tiramisu__function__pb2.TiramisuFunctionName.SerializeToString,
-            response_deserializer=tiramisu__function__pb2.TiramisuFuction.FromString,
+            response_deserializer=tiramisu__function__pb2.TiramisuFunction.FromString,
         )
         self.SaveTiramisuFunction = channel.unary_unary(
             "/tiramisudataserver.TiramisuDataServer/SaveTiramisuFunction",
-            request_serializer=tiramisu__function__pb2.TiramisuFuction.SerializeToString,
+            request_serializer=tiramisu__function__pb2.TiramisuFunction.SerializeToString,
             response_deserializer=tiramisu__function__pb2.TiramisuFunctionName.FromString,
+        )
+        self.GetDatasetSize = channel.unary_unary(
+            "/tiramisudataserver.TiramisuDataServer/GetDatasetSize",
+            request_serializer=tiramisu__function__pb2.Empty.SerializeToString,
+            response_deserializer=tiramisu__function__pb2.DatasetSize.FromString,
+        )
+        self.GetListOfFunctions = channel.unary_unary(
+            "/tiramisudataserver.TiramisuDataServer/GetListOfFunctions",
+            request_serializer=tiramisu__function__pb2.Empty.SerializeToString,
+            response_deserializer=tiramisu__function__pb2.TiramisuListOfFunctions.FromString,
         )
 
 
@@ -41,18 +51,40 @@ class TiramisuDataServerServicer(object):
         context.set_details("Method not implemented!")
         raise NotImplementedError("Method not implemented!")
 
+    def GetDatasetSize(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details("Method not implemented!")
+        raise NotImplementedError("Method not implemented!")
+
+    def GetListOfFunctions(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details("Method not implemented!")
+        raise NotImplementedError("Method not implemented!")
+
 
 def add_TiramisuDataServerServicer_to_server(servicer, server):
     rpc_method_handlers = {
         "GetTiramisuFunction": grpc.unary_unary_rpc_method_handler(
             servicer.GetTiramisuFunction,
             request_deserializer=tiramisu__function__pb2.TiramisuFunctionName.FromString,
-            response_serializer=tiramisu__function__pb2.TiramisuFuction.SerializeToString,
+            response_serializer=tiramisu__function__pb2.TiramisuFunction.SerializeToString,
         ),
         "SaveTiramisuFunction": grpc.unary_unary_rpc_method_handler(
             servicer.SaveTiramisuFunction,
-            request_deserializer=tiramisu__function__pb2.TiramisuFuction.FromString,
+            request_deserializer=tiramisu__function__pb2.TiramisuFunction.FromString,
             response_serializer=tiramisu__function__pb2.TiramisuFunctionName.SerializeToString,
+        ),
+        "GetDatasetSize": grpc.unary_unary_rpc_method_handler(
+            servicer.GetDatasetSize,
+            request_deserializer=tiramisu__function__pb2.Empty.FromString,
+            response_serializer=tiramisu__function__pb2.DatasetSize.SerializeToString,
+        ),
+        "GetListOfFunctions": grpc.unary_unary_rpc_method_handler(
+            servicer.GetListOfFunctions,
+            request_deserializer=tiramisu__function__pb2.Empty.FromString,
+            response_serializer=tiramisu__function__pb2.TiramisuListOfFunctions.SerializeToString,
         ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -83,7 +115,7 @@ class TiramisuDataServer(object):
             target,
             "/tiramisudataserver.TiramisuDataServer/GetTiramisuFunction",
             tiramisu__function__pb2.TiramisuFunctionName.SerializeToString,
-            tiramisu__function__pb2.TiramisuFuction.FromString,
+            tiramisu__function__pb2.TiramisuFunction.FromString,
             options,
             channel_credentials,
             insecure,
@@ -111,8 +143,66 @@ class TiramisuDataServer(object):
             request,
             target,
             "/tiramisudataserver.TiramisuDataServer/SaveTiramisuFunction",
-            tiramisu__function__pb2.TiramisuFuction.SerializeToString,
+            tiramisu__function__pb2.TiramisuFunction.SerializeToString,
             tiramisu__function__pb2.TiramisuFunctionName.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+        )
+
+    @staticmethod
+    def GetDatasetSize(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure=False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            "/tiramisudataserver.TiramisuDataServer/GetDatasetSize",
+            tiramisu__function__pb2.Empty.SerializeToString,
+            tiramisu__function__pb2.DatasetSize.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+        )
+
+    @staticmethod
+    def GetListOfFunctions(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure=False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            "/tiramisudataserver.TiramisuDataServer/GetListOfFunctions",
+            tiramisu__function__pb2.Empty.SerializeToString,
+            tiramisu__function__pb2.TiramisuListOfFunctions.FromString,
             options,
             channel_credentials,
             insecure,

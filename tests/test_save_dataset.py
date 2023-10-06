@@ -2,7 +2,6 @@ import json
 import os
 
 import grpc
-
 from dataset_grpc_server.config import Config
 from dataset_grpc_server.grpc_files import (
     tiramisu_function_pb2,
@@ -25,7 +24,7 @@ def test_get_function_by_name():
 
         for i in range(Config.config.saving_frequency + 1):
             save_response = stub.SaveTiramisuFunction(
-                tiramisu_function_pb2.TiramisuFuction(
+                tiramisu_function_pb2.TiramisuFunction(
                     name=response.name,
                     content=json.dumps(content),
                 )
