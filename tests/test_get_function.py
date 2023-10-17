@@ -1,7 +1,6 @@
 import json
 
 import grpc
-
 from dataset_grpc_server.grpc_files import (
     tiramisu_function_pb2,
     tiramisu_function_pb2_grpc,
@@ -29,3 +28,4 @@ def test_get_function_by_name():
     assert response.name == "function789281"
     content = json.loads(response.content)
     assert "program_annotation" in content
+    assert type(response.wrapper) == bytes

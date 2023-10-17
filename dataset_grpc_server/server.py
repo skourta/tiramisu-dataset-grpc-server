@@ -25,12 +25,17 @@ class TiramisuServicer(tiramisu_function_pb2_grpc.TiramisuDataServerServicer):
     def GetTiramisuFunction(self, request, context):
         function_name = request.name
         if function_name != "":
-            data, cpp = self.data_service.get_function_by_name(function_name)
+            data, cpp, wrapper = self.data_service.get_function_by_name(function_name)
         else:
-            function_name, data, cpp = self.data_service.get_next_function()
+            function_name, data, cpp, wrapper = self.data_service.get_next_function()
+
+        wrapper = "" if wrapper is None else wrapper.decode()
         print("Served", function_name)
         return tiramisu_function_pb2.TiramisuFunction(
-            name=function_name, content=json.dumps(data), cpp=json.dumps(cpp)
+            name=function_name,
+            content=json.dumps(data),
+            cpp=json.dumps(cpp),
+            wrapper=wrapper,
         )
 
     def SaveTiramisuFunction(self, request, context):
@@ -40,11 +45,13 @@ class TiramisuServicer(tiramisu_function_pb2_grpc.TiramisuDataServerServicer):
         return tiramisu_function_pb2.TiramisuFunctionName(name=function_name)
 
     def GetDatasetSize(self, request, context):
-        return tiramisu_function_pb2.DatasetSize(size=len(self.data_service.dataset))
+        return tiramisu_function_pb2.DatasetSize(
+            size=len(self.data_service.function_names)
+        )
 
     def GetListOfFunctions(self, request, context):
         return tiramisu_function_pb2.TiramisuListOfFunctions(
-            names=list(self.data_service.dataset.keys())
+            names=self.data_service.function_names
         )
 
 
