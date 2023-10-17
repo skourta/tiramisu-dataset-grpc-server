@@ -16,6 +16,7 @@ def test_get_function():
 
     assert response.name != ""
     assert response.name.startswith("function")
+    assert type(response.wrapper) == bytes
 
 
 def test_get_function_by_name():

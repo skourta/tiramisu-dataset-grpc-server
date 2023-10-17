@@ -37,7 +37,7 @@ message TiramisuFunction {
   string name = 1;
   string content = 2;
   string cpp = 3;
-  string wrapper = 4;
+  bytes wrapper = 4;
 }
 
 message DatasetSize {

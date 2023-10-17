@@ -29,7 +29,6 @@ class TiramisuServicer(tiramisu_function_pb2_grpc.TiramisuDataServerServicer):
         else:
             function_name, data, cpp, wrapper = self.data_service.get_next_function()
 
-        wrapper = "" if wrapper is None else wrapper.decode()
         print("Served", function_name)
         return tiramisu_function_pb2.TiramisuFunction(
             name=function_name,

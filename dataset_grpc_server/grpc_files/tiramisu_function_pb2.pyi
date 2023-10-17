@@ -20,8 +20,8 @@ class TiramisuFunction(_message.Message):
     name: str
     content: str
     cpp: str
-    wrapper: str
-    def __init__(self, name: _Optional[str] = ..., content: _Optional[str] = ..., cpp: _Optional[str] = ..., wrapper: _Optional[str] = ...) -> None: ...
+    wrapper: bytes
+    def __init__(self, name: _Optional[str] = ..., content: _Optional[str] = ..., cpp: _Optional[str] = ..., wrapper: _Optional[bytes] = ...) -> None: ...
 
 class DatasetSize(_message.Message):
     __slots__ = ["size"]
