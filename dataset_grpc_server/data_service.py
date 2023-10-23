@@ -16,6 +16,7 @@ class DataService:
         self.shuffle = dataset_config.shuffle
         self.seed = dataset_config.seed
         self.saving_frequency = dataset_config.saving_frequency
+        self.wrappers_path = dataset_config.wrappers_path
 
         self.dataset = {}
         self.function_names: List[str] = []
@@ -35,6 +36,15 @@ class DataService:
 
         with open(self.cpps_path, "rb") as f:
             self.cpps: Dict = pickle.load(f)
+
+        if self.wrappers_path:
+            with open(self.wrappers_path, "rb") as f:
+                self.wrappers: Dict = pickle.load(f)
+
+            # intersection of functions in dataset and wrappers
+            self.function_names = list(
+                set(self.function_names) & set(self.wrappers.keys())
+            )
 
         # Shuffle the dataset (can be used with random sampling turned off to get a random order)
         if self.shuffle:
@@ -56,10 +66,21 @@ class DataService:
             ]
             self.current_function_index += 1
 
-        return function_name, self.dataset[function_name], self.cpps[function_name]
+        wrapper = self.wrappers[function_name] if self.wrappers_path else None
+        return (
+            function_name,
+            self.dataset[function_name],
+            self.cpps[function_name],
+            wrapper,
+        )
 
     def get_function_by_name(self, function_name):
-        return self.dataset[function_name], self.cpps[function_name]
+        wrapper = self.wrappers[function_name] if self.wrappers_path else None
+        return (
+            self.dataset[function_name],
+            self.cpps[function_name],
+            wrapper,
+        )
 
     # Update the dataset with the new function
     def update_dataset(self, function_name: str, function_dict: dict) -> bool:

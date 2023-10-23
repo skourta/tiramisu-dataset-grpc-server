@@ -14,6 +14,7 @@ class DatasetConfig:
     seed: int = None
     saving_frequency: int = 10000
     server_address: str = "."
+    wrappers_path: str | None = None
 
     def __init__(self, dataset_config_dict: Dict):
         # self.dataset_format = DatasetFormat.from_string(
@@ -25,6 +26,9 @@ class DatasetConfig:
         self.shuffle = dataset_config_dict["shuffle"]
         self.seed = dataset_config_dict["seed"]
         self.saving_frequency = dataset_config_dict["saving_frequency"]
+
+        if "wrappers_path" in dataset_config_dict:
+            self.wrappers_path = dataset_config_dict["wrappers_path"]
 
         if dataset_config_dict["is_benchmark"]:
             self.dataset_path = (

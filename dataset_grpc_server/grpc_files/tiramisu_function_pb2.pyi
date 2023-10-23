@@ -12,14 +12,16 @@ class TiramisuFunctionName(_message.Message):
     def __init__(self, name: _Optional[str] = ...) -> None: ...
 
 class TiramisuFunction(_message.Message):
-    __slots__ = ["name", "content", "cpp"]
+    __slots__ = ["name", "content", "cpp", "wrapper"]
     NAME_FIELD_NUMBER: _ClassVar[int]
     CONTENT_FIELD_NUMBER: _ClassVar[int]
     CPP_FIELD_NUMBER: _ClassVar[int]
+    WRAPPER_FIELD_NUMBER: _ClassVar[int]
     name: str
     content: str
     cpp: str
-    def __init__(self, name: _Optional[str] = ..., content: _Optional[str] = ..., cpp: _Optional[str] = ...) -> None: ...
+    wrapper: bytes
+    def __init__(self, name: _Optional[str] = ..., content: _Optional[str] = ..., cpp: _Optional[str] = ..., wrapper: _Optional[bytes] = ...) -> None: ...
 
 class DatasetSize(_message.Message):
     __slots__ = ["size"]
