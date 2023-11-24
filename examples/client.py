@@ -1,13 +1,11 @@
 from __future__ import print_function
 
-# declare arg parser and get ip
 import argparse
 import json
 import logging
 import socket
 
 import grpc
-
 from dataset_grpc_server.grpc_files import (
     tiramisu_function_pb2,
     tiramisu_function_pb2_grpc,
