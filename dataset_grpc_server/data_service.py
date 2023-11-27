@@ -6,10 +6,7 @@ from config import DatasetConfig
 
 
 class DataService:
-    def __init__(
-        self,
-        dataset_config: DatasetConfig,
-    ):
+    def __init__(self, dataset_config: DatasetConfig, current_function_index: int = 0):
         self.dataset_path = dataset_config.dataset_path
         self.cpps_path = dataset_config.cpps_path
         self.path_to_save_dataset = dataset_config.save_path
@@ -17,11 +14,11 @@ class DataService:
         self.seed = dataset_config.seed
         self.saving_frequency = dataset_config.saving_frequency
         self.wrappers_path = dataset_config.wrappers_path
+        self.current_function_index = current_function_index
 
         self.dataset = {}
         self.function_names: List[str] = []
         self.dataset_size = 0
-        self.current_function_index = 0
         self.nbr_updates = 0
         self.dataset_name = dataset_config.dataset_path.split("/")[-1].split(".")[0]
         self.cpps = {}
